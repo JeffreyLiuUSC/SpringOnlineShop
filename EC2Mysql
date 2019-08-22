@@ -1,0 +1,24 @@
+DROP DATABASE IF EXISTS ecommerce; 
+
+CREATE DATABASE ecommerce; USE ecommerce; 
+
+CREATE TABLE authorities (id INT NOT NULL, authorities VARCHAR(255), emailId VARCHAR(255), PRIMARY KEY (id)); 
+
+CREATE TABLE billingAddress(id INT NOT NULL, address VARCHAR(255), city VARCHAR(255), country VARCHAR(255), state VARCHAR(255), zipcode VARCHAR(255), PRIMARY KEY (id));
+
+CREATE TABLE cart (id INT NOT NULL, totalPrice DOUBLE NOT NULL, PRIMARY KEY(id));
+
+CREATE TABLE cartitem (id INT NOT NULL, price DOUBLE NOT NULL, quantity INT NOT NULL, cart_id INT, product_id INT, PRIMARY KEY(id), FOREIGN KEY(cart_id)REFERENCES cart(id), FOREIGN KEY(product_id)REFERENCES product(id)); 
+
+CREATE TABLE customer(id INT NOT NULL, customerPhone VARCHAR(255), firstName VARCHAR(255), lastName VARCHAR(255), billingAddressId INT, cartId INT, shippingAddressId INT, userId INT, PRIMARY KEY(id), FOREIGN KEY(billingAddressId)REFERENCES billingAddress(id), FOREIGN KEY(cartId)REFERENCES cart(id), FOREIGN KEY(shippingAddressId)REFERENCES shippingAddress(id), FOREIGN KEY(userId)REFERENCES users(id));
+
+CREATE TABLE hibernate_sequence (next_val BIGINT(20));
+
+CREATE TABLE product (id INT NOT NULL, category VARCHAR(255), description VARCHAR(255), manufacturer VARCHAR(255), name VARCHAR(255), price DOUBLE NOT NULL, unit VARCHAR(255), PRIMARY KEY(id));
+
+CREATE TABLE salesorder (id INT NOT NULL, billingAddress_id INT, cart_id INT, customer_id INT, shippingAddress_id INT, PRIMARY KEY(id), FOREIGN KEY(billingAddress_id)REFERENCES billingAddress(id), FOREIGN KEY(cart_id)REFERENCES cart(id), FOREIGN KEY(customer_id)REFERENCES customer(id), FOREIGN KEY(shippingAddress_id)REFERENCES shippingAddress(id));
+
+CREATE TABLE shippingAddress (id INT NOT NULL, address VARCHAR(255), city VARCHAR(255), country VARCHAR(255), state VARCHAR(255), zipcode VARCHAR(255), PRIMARY KEY(id));
+
+CREATE TABLE users (id INT NOT NULL, emailId VARCHAR(255), enable BIT(1) NOT NULL, password VARCHAR(255), PRIMARY KEY(id));
+
