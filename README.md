@@ -5,7 +5,7 @@ Spring backend online shop system
 <br>
 <strong>Security</strong>: Administor and User of different Authentication
 <br>
-<strong>Database</strong>: 1. Mysql for small number of users with high speed of Query. 2. MongoDB for scalable users. EC2 deployed with Mysql
+<strong>Database</strong>: Mysql for small number of users with high speed of Query. Amazon EC2 deployed with Mysql
 <br>
 <strong>Demonstration</strong>: http://54.193.76.134/OnlineShop-master/
 <br>
